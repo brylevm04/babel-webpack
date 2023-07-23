@@ -1,0 +1,83 @@
+body {
+  background-color: hsl(0, 0%, 10%);
+  color: white;
+}
+
+
+#canvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border: 0px none; 
+  margin: 0px;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  image-rendering: optimizeSpeed;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+#spinner {
+  height: 25px;
+  width: 25px;
+  margin: 0px auto;
+  -webkit-animation: rotation 1.75s linear infinite;
+  -moz-animation: rotation 1.75s linear infinite;
+  -o-animation: rotation 1.75s linear infinite;
+  animation: rotation 1.75s linear infinite;
+  border-left: 4px solid hsl(283, 96%, 21%);
+  border-right: 4px solid hsl(283, 96%, 21%);
+  border-bottom: 4px solid  hsl(283, 96%, 21%);
+  border-top: 4px solid hsl(325, 95%, 83%);
+  border-radius: 100%;
+  background-color: hsl(207, 92%, 64%);
+}
+
+@-webkit-keyframes rotation {
+  from {-webkit-transform: rotate(0deg);}
+  to {-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes rotation {
+  from {-moz-transform: rotate(0deg);}
+  to {-moz-transform: rotate(360deg);}
+}
+@-o-keyframes rotation {
+  from {-o-transform: rotate(0deg);}
+  to {-o-transform: rotate(360deg);}
+}
+@keyframes rotation {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
+}
+
+#status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+#start-game {
+  height: auto;
+  margin-right: 20px;
+}
+
+#buttons {
+  padding-bottom: 20px;
+}

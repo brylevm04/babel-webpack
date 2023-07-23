@@ -1,0 +1,40 @@
+{
+  "root": true,
+
+  "extends": [
+    "hardcore",
+    "hardcore/react",
+    "hardcore/react-testing-library",
+    "hardcore/ts",
+    "prettier/prettier"
+  ],
+
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+
+  "rules": {
+    "prettier/prettier": [
+      "warn",
+      {
+        "singleQuote": false,
+        "semi": false,
+        "endOfLine": "auto"
+      }
+    ],
+    "@typescript-eslint/quotes": [
+      "error",
+      "double",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "@typescript-eslint/prefer-readonly-parameter-types": ["off"],
+    "semi": [
+      "error",
+      "never"
+    ]
+  },
+  "ignorePatterns": ["doom2d*.js"]
+}

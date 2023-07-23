@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <section id="launcher">
+    <div id="title">
+      <strong>
+        <%= htmlWebpackPlugin.options.title %>
+      </strong>
+    </div>
+    <div id="status">
+      <figure id="spinner">
+      </figure>
+      <div id="progress">
+        Welcome to <%= htmlWebpackPlugin.options.title %>!
+      </progress>
+    </div>
+    <div id="input">
+      <div id="buttons">
+        <button id="start-game">Start game</button>
+        <button id="options">Options</button>
+      </div>
+      <div id="options">
+        <label for="text-arg" id="label-arg" style="order: 1">Launch with arguments:</label>
+        <input id="text-arg" type="text"></input>
+      </div>
+    </div>
+  </section>
+  <section id="game" style="display: none">
+    <div id="area">
+      <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex=-1></canvas>
+    </div>
+  </section>
+</body>
+
+</html>
