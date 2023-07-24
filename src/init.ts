@@ -180,6 +180,9 @@ const module: Partial<GameModule> = {
     },
   ],
 
+  print: (message: unknown) => { console.log(message) },
+  printErr: (message: unknown) => { console.log(message) },
+
   setStatus: printStatus,
 
   totalDependencies: 0,
