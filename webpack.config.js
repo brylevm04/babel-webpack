@@ -7,6 +7,9 @@
 const path = require("node:path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const TerserPlugin = require("terser-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const HTMLInlineCSSWebpackPlugin =
+  require("html-inline-css-webpack-plugin").default
 
 module.exports = [
   {
@@ -19,22 +22,14 @@ module.exports = [
         {
           exclude: /node_modules/u,
           loader: "babel-loader",
-          test: /\.ts$/u,
+          // eslint-disable-next-line max-len
+          // eslint-disable-next-line prefer-named-capture-group, regexp/prefer-named-capture-group
+          test: /\.(mts|ts)$/u,
         },
         {
           test: /\.css$/u,
 
-          use: [
-            {
-              loader: "style-loader",
-
-              options: {
-                injectType: "singletonStyleTag",
-                insert: "head",
-              },
-            },
-            "css-loader",
-          ],
+          use: [MiniCssExtractPlugin.loader, "css-loader"],
         },
       ],
     },
@@ -65,11 +60,16 @@ module.exports = [
     },
 
     plugins: [
+      new MiniCssExtractPlugin({
+        chunkFilename: "[id].css",
+        filename: "[name].css",
+      }),
       new HtmlWebpackPlugin({
         template: "src/index.html",
 
         title: "Doom 2D",
       }),
+      new HTMLInlineCSSWebpackPlugin(),
     ],
 
     resolve: {
