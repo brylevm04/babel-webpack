@@ -163,13 +163,13 @@ const module: Partial<GameModule> = {
   arguments: [],
 
   canvas: (() => {
-    const canvas = document.querySelector("#canvas")
+    const canv = document.querySelector("#canvas")
 
-    if (canvas === null) {
+    if (canv === null) {
       throw new Error("Canvas is not defined!")
     }
 
-    return canvas
+    return canv
   })(),
 
   postRun: [],
