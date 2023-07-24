@@ -2,8 +2,8 @@
 /// <reference types="emscripten" />
 import { feature } from "wasm-check"
 
-import defaultsASMJS from "./doom2d.asm.js"
-import defaultsWASM from "./doom2d.wasm.js"
+import defaultsASMJS from "./doom2d.asm.mjs"
+import defaultsWASM from "./doom2d.wasm.mjs"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface GameModule extends globalThis.EmscriptenModuleFactory {}
