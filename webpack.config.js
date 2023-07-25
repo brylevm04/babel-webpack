@@ -20,11 +20,22 @@ module.exports = [
     module: {
       rules: [
         {
-          exclude: /node_modules/u,
+          exclude: [
+            /\bcore-js\b/u,
+            /\bwebpack\/buildin\b/u,
+            /@babel\/runtime-corejs3/u,
+            /doom2d.*\.m?js/u,
+          ],
+
           loader: "babel-loader",
+
+          options: {
+            sourceType: "unambiguous",
+          },
+
           // eslint-disable-next-line max-len
           // eslint-disable-next-line prefer-named-capture-group, regexp/prefer-named-capture-group
-          test: /\.(mts|ts)$/u,
+          test: /\.(m?js|m?ts)$/u,
         },
         {
           test: /\.css$/u,
@@ -93,6 +104,6 @@ module.exports = [
       },
     },
 
-    target: "web",
+    target: "browserslist",
   },
 ]
