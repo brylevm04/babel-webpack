@@ -18,9 +18,6 @@ argumentInput.addEventListener("change", () => {
   argumentText = argumentInput.value
 })
 
-buttonStart.addEventListener("click", async () => {
-  console.log("here")
-  await startGame(argumentText)
+buttonStart.addEventListener("click", () => {
+  void startGame(argumentText)
 })
-
-//const gameModule = await createGameModule(module)
