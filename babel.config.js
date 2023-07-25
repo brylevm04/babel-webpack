@@ -28,7 +28,11 @@ module.exports = function (api) {
         "@babel/preset-env",
         {
           corejs: { proposals: true, version: "3.31" },
+          modules: "auto",
+          debug: true,
+
           shippedProposals: true,
+
           useBuiltIns: "usage",
         },
       ],
@@ -40,5 +44,7 @@ module.exports = function (api) {
         },
       ],
     ],
+
+    sourceType: "unambiguous",
   }
 }
