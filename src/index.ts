@@ -1,6 +1,7 @@
 /* eslint-disable ssr-friendly/no-dom-globals-in-module-scope */
 /// <reference types="emscripten" />
 import "./index.css"
+import "core-js"
 
 import { startGame } from "./init"
 

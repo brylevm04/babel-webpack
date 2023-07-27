@@ -14,13 +14,20 @@ module.exports = function (api) {
         "@babel/plugin-transform-runtime",
         {
           absoluteRuntime: false,
-          corejs: 3,
+          corejs: { proposals: true, version: 3 },
           helpers: true,
           regenerator: true,
           version: "^7.22.9",
         },
       ],
-      ["@babel/plugin-transform-typescript"],
+      [
+        "@babel/plugin-transform-typescript",
+        {
+          allowDeclareFields: true,
+          allowNamespaces: true,
+          optimizeConstEnums: true,
+        },
+      ],
     ],
 
     presets: [
@@ -32,17 +39,9 @@ module.exports = function (api) {
           debug: true,
 
           shippedProposals: true,
-
-          useBuiltIns: "usage",
         },
       ],
-      [
-        "@babel/preset-typescript",
-        {
-          allowDeclareFields: true,
-          optimizeConstEnums: true,
-        },
-      ],
+      ["@babel/preset-typescript"],
     ],
 
     sourceType: "unambiguous",
