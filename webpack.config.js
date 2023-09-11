@@ -1,4 +1,5 @@
 /* eslint-disable putout/putout */
+/* eslint-disable camelcase */
 /* eslint-disable import/no-commonjs */
 /* eslint-disable import/unambiguous */
 /* eslint-disable unicorn/prefer-module */
@@ -50,7 +51,7 @@ module.exports = [
     },
 
     optimization: {
-      minimize: true,
+      minimize: false,
 
       minimizer: [
         new TerserPlugin({
@@ -84,7 +85,7 @@ module.exports = [
     ],
 
     resolve: {
-      extensions: [".ts", ".js"],
+      extensions: [".js", ".jsx", ".es6", ".es", ".mjs", ".ts", ".tsx"],
 
       fallback: {
         buffer: false,

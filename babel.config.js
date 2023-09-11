@@ -9,39 +9,31 @@ module.exports = function (api) {
   api.cache(true)
 
   return {
-    plugins: [
-      [
-        "@babel/plugin-transform-runtime",
-        {
-          absoluteRuntime: false,
-          corejs: { proposals: true, version: 3 },
-          helpers: true,
-          regenerator: true,
-          version: "^7.22.9",
-        },
-      ],
-      [
-        "@babel/plugin-transform-typescript",
-        {
-          allowDeclareFields: true,
-          allowNamespaces: true,
-          optimizeConstEnums: true,
-        },
-      ],
-    ],
+    compact: false,
+    minified: false,
+
+    plugins: [],
 
     presets: [
       [
         "@babel/preset-env",
         {
           corejs: { proposals: true, version: "3.31" },
-          modules: "auto",
           debug: true,
+          modules: "auto",
 
           shippedProposals: true,
+          useBuiltIns: "entry",
         },
       ],
-      ["@babel/preset-typescript"],
+      [
+        "@babel/preset-typescript",
+        {
+          allowDeclareFields: true,
+          allowNamespaces: true,
+          optimizeConstEnums: true,
+        },
+      ],
     ],
 
     sourceType: "unambiguous",

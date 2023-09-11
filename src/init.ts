@@ -3,7 +3,9 @@
 
 import { type IDBPDatabase, openDB } from "idb"
 
-import { createGameModule, type GameModule } from "./module/doom2d"
+import createGameModule from "./module/doom2d.ts"
+import type GameModule from "./module/game-module"
+import ModuleFsi from "./module-fs/module-fsi.ts"
 
 const databaseName = "/persistent"
 const storeName = "FILE_DATA"
@@ -99,25 +101,21 @@ async function syncFs(isPopulate: boolean, module: Readonly<GameModule>) {
   })
 }
 
-async function toMemfs(
-  source: string,
-  target: string,
-  module: Readonly<GameModule>,
-) {
+function toMemfs(source: string, target: string, module: Readonly<GameModule>) {
   const buf = module.FS.readFile(source, {})
   const stream = module.FS.open(target, "w+")
   module.FS.write(stream, buf, 0, buf.length, 0)
   module.FS.close(stream)
 }
 
-async function writeWads(module: Readonly<GameModule>) {
-  await toMemfs("/persistent/doom2d.wad", "/doom2d.wad", module)
+function writeWads(module: Readonly<GameModule>) {
+  toMemfs("/persistent/doom2d.wad", "/doom2d.wad", module)
 }
 
 async function initFs(module: Readonly<GameModule>) {
   mountFs(module)
   await syncFs(true, module)
-  await writeWads(module)
+  writeWads(module)
 }
 
 async function initGame(module: Readonly<GameModule>) {
@@ -140,14 +138,9 @@ async function fetchAndPut(database: Readonly<IDBPDatabase>, store: string) {
   await put(database, store, new Uint8Array(buf), target)
 }
 
-async function downloadGamefiles() {
+async function downloadGamefiles(module: GameModule) {
   printStatus("Checking game resources")
-  const persistentDatabase = await initDatabase(databaseName, storeName)
-  const isExists = await existsInDatabase(
-    persistentDatabase,
-    storeName,
-    "/persistent/doom2d.wad",
-  )
+  const fio = new ModuleFsi(module, "/persistent", "persistesnt")
 
   if (isExists) {
     printStatus("Game resources found")
@@ -163,7 +156,7 @@ const module: Partial<GameModule> = {
   arguments: [],
 
   canvas: (() => {
-    const canv = document.querySelector("#canvas")
+    const canv = document.querySelector<HTMLCanvasElement>("#canvas")
 
     if (canv === null) {
       throw new Error("Canvas is not defined!")
@@ -176,12 +169,18 @@ const module: Partial<GameModule> = {
 
   preInit: [
     async () => {
-      await initGame(module)
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      await initGame(module as GameModule)
     },
   ],
 
-  print: (message: unknown) => { console.log(message) },
-  printErr: (message: unknown) => { console.log(message) },
+  print: (message: unknown) => {
+    debugLog(message)
+  },
+
+  printErr: (message: unknown) => {
+    debugLog(message)
+  },
 
   setStatus: printStatus,
 
@@ -206,7 +205,7 @@ async function startGame(argv: string) {
   ) {
     throw new Error("Invalid DOM!")
   }
-  await downloadGamefiles()
+  await downloadGamefiles(module)
   if (argv !== "") {
     module.arguments = splitIntoArguments(argv)
   }

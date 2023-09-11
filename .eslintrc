@@ -34,7 +34,18 @@
     "semi": [
       "error",
       "never"
-    ]
+    ],
+    "import/extensions": ["off"],
+    "import/no-extraneous-dependencies": ["off"],
+    "spaced-comment": ["off"],
+    "typescript/remove-useless-parens": ["off"],
+    "@typescript-eslint/parameter-properties": ["off"]
   },
-  "ignorePatterns": ["doom2d*.js"]
+
+  "overrides": [
+    {
+      "files": ["doom2d*.m?js"]
+    }
+  ],
+  "ignorePatterns": ["doom2d*.m?js"]
 }
